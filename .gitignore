@@ -1,0 +1,17 @@
+# Maven and build artifacts
+target/
+*.log
+
+# Eclipse/IDEA files
+.classpath
+.project
+.settings/
+.idea/
+
+# TestNG output
+test-output/
+reports/
+
+# OS-specific
+.DS_Store
+Thumbs.db
