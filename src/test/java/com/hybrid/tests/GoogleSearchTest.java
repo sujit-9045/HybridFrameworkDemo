@@ -49,6 +49,13 @@ package com.hybrid.tests;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 
 import com.hybrid.base.BaseClass;
@@ -64,19 +71,22 @@ public class GoogleSearchTest extends BaseClass {
     }
 
     @BeforeMethod
-    public void setup() throws IOException {
+    public void setup() throws IOException, InterruptedException {
         launchBrowser();
     }
 
     @Test
     public void testGoogleSearch() throws InterruptedException {
-        GooglePage page = new GooglePage(driver);
-        Thread.sleep(2000);
-        page.search("Rishabh Software");
+    	   driver.get("https://www.google.com");
 
-        Thread.sleep(5000);
-        System.out.println("✅ Search performed");
-    }
+    	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    	    WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));
+    	    searchBox.sendKeys("Rishabh Software");
+    	    searchBox.sendKeys(Keys.ENTER);
+
+    	    wait.until(ExpectedConditions.titleContains("Rishabh"));
+    	    System.out.println("✅ Search successful");
+    	}
 
     @AfterMethod
     public void tearDown(ITestResult result) {

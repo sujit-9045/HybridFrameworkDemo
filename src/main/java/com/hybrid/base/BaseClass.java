@@ -21,7 +21,7 @@ public class BaseClass {
     public static ExtentTest logger;
     public WebDriver driver;
 
-    public void launchBrowser() throws IOException {
+    public void launchBrowser() throws IOException, InterruptedException {
         System.out.println("===> Launching browser...");
 
         // ✅ Load URL from config.properties
@@ -49,6 +49,7 @@ public class BaseClass {
 
         driver.manage().window().maximize();
         driver.get(url);
+        Thread.sleep(3000);
     }
 
     @BeforeTest
